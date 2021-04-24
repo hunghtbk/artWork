@@ -1,6 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>qml/componentCreation.js</file>
+        <file>qml/ImageElement.qml</file>
+        <file>qml/main.qml</file>
+        <file>Image/arrow.png</file>
+        <file>Image/black_arrow.png</file>
+        <file>Image/house.png</file>
+        <file>Image/pine.png</file>
+        <file>Image/rotation.png</file>
+        <file>Image/sun.jpg</file>
     </qresource>
 </RCC>

@@ -1,7 +1,9 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
-
+import QtQuick.Dialogs 1.1
+import "componentCreation.js" as MyScript
 Window {
+    id: appWindow
     visible: true
     width: 960
     height: 480
@@ -9,6 +11,8 @@ Window {
 
     property int editAreaWidth: 480
     property int editAreaHeigh: 320
+
+    property int objectCounter: 0
 
     Rectangle {
         id: customize_your_art_work
@@ -36,7 +40,7 @@ Window {
             radius: 3
             TextEdit {
                 id: art_work_name
-                anchors.centerIn: parent.Center
+                anchors.fill: parent
                 text: "hunght"
                 color: "black"
             }
@@ -60,7 +64,7 @@ Window {
             radius: 3
             TextEdit {
                 id: category_name
-                anchors.centerIn: parent.Center
+                anchors.fill: parent
                 text: "hunght"
                 color: "black"
             }
@@ -94,6 +98,7 @@ Window {
                 anchors.fill: parent
                 onClicked: {
                     console.log("upload Art")
+                    fileDialog.visible = true
                 }
             }
         }
@@ -122,6 +127,29 @@ Window {
             }
         }
 
+    }
+
+//-------------------------------File Dialog----------------------------//
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+        onAccepted: {
+            console.log("You chose: " + fileDialog.fileUrls)
+            var str = ""
+            for(var i in fileDialog.fileUrls){
+                var url = fileDialog.fileUrls[i]
+                str += Qt.resolvedUrl(url)
+            }
+            objectCounter = objectCounter + 1;
+            var objName = "hunght" + objectCounter
+            MyScript.createSpriteObjects(str, objName);
+            UIBridge.importObjectNametToList(objName)
+        }
+        onRejected: {
+            console.log("Canceled")
+        }
+        Component.onCompleted: visible = false
     }
 //----------------------------------------------------------------------//
     Rectangle {
