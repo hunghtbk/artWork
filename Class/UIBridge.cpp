@@ -5,6 +5,7 @@ UIBridge::UIBridge(QObject* appWindown) : QObject(appWindown) {
     connect(this, SIGNAL(hmiEvent(QString,QString)), appWindown, SLOT(handleHMIEvent(QString,QString)));
     connect(this, SIGNAL(changePositionEvent(int, int, QString)), appWindown, SLOT(handleChangePositionEvent(int, int, QString)));
     connect(this, SIGNAL(sendListToControllApp(QStringList)), appWindown, SLOT(handleList(QStringList)));
+    connect(this, SIGNAL(setMaxWidthHeighEditArea(int,int)), appWindown, SLOT(setMaxWidthHeigh(int,int)));
 }
 void UIBridge::log(QString message) {
     emit hmiEvent(message, "vlvlvlvlvlvlvlv");
@@ -24,6 +25,11 @@ void UIBridge::mainQMLCallChangePosition(int x, int y)
 void UIBridge::importObjectNametToList(QString obj)
 {
     objNameList.append(obj);
+}
+
+void UIBridge::notifyWidthheighOfEditArea(int width, int heigh)
+{
+    emit setMaxWidthHeighEditArea(width, heigh);
 }
 
 void UIBridge::genInfo()

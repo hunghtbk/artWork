@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainForm.ui.qml</file>
         <file>qml/componentCreation.js</file>
         <file>qml/ImageElement.qml</file>
         <file>qml/main.qml</file>

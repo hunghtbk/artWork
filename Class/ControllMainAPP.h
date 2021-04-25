@@ -21,10 +21,14 @@ private:
 
     UIBridge* m_uiBridge = nullptr;
 
+    int mWidthEditArea;
+    int mheighEditArea;
+
 public slots:
     void handleHMIEvent(QString str1, QString str2);
     void handleChangePositionEvent(int x, int y, QString currentIMGObjName);
     void handleList(QStringList mList);
+    void setMaxWidthHeigh(int width,int heigh);
 };
 
 #endif // CONTROLLMAINAPP_H

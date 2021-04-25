@@ -45,7 +45,17 @@ void ControllMainAPP::handleChangePositionEvent(int x, int y, QString currentIMG
             int imgHeight = qmlObject->property("height").toInt();
 
             int newX = imgX + x - imgWidth/2;
+            if (newX < 0) {
+                newX = 0;
+            } else if (newX > (mWidthEditArea - imgWidth)) {
+                newX = mWidthEditArea - imgWidth;
+            }
             int newY = imgY + y - imgHeight/2;
+            if (newY < 0) {
+                newY = 0;
+            } else if (newY > (mheighEditArea - imgHeight)) {
+                newY = (mheighEditArea - imgHeight);
+            }
             qmlObject->setProperty("x", newX);
             qmlObject->setProperty("y", newY);
         } else {
@@ -59,4 +69,11 @@ void ControllMainAPP::handleList(QStringList mList)
     for (int i = 0; i < mList.length(); i++) {
         qDebug() << "Information of objectname: " << mList.at(i);
     }
+}
+
+void ControllMainAPP::setMaxWidthHeigh(int width, int heigh)
+{
+    qDebug() << "Set width, heigh" << width << "-" << heigh;
+    mWidthEditArea = width;
+    mheighEditArea = heigh;
 }
